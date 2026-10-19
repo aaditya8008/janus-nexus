@@ -4,6 +4,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.janus.management.dto.responseDto.HealthResponse;
+import com.janus.management.service.HealthService;
+
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -11,20 +14,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-@RestController 
-@RequestMapping ("/health")
+@RestController
+@RequestMapping("/health")
 public class HealthController {
-    private String servicename;
-    private String serviceDescription;
 
-    public HealthController(@Value("${info.app.name}") String servicename, @Value("${info.app.description}") String serviceDescription) {
-        this.servicename = servicename;
-        this.serviceDescription = serviceDescription;
+    public final HealthService healthService;
+
+    public HealthController(HealthService healthService) {
+        this.healthService = healthService;
     }
 
     @GetMapping
     public ResponseEntity<HealthResponse> health() {
-        HealthResponse response = new HealthResponse(servicename, serviceDescription, "UP");
-        return ResponseEntity.ok(response);
+        String dbStatus = healthService.getHealth();
+        return ResponseEntity.ok(
+                new HealthResponse("UP", dbStatus, LocalDateTime.now()));
     }
 }

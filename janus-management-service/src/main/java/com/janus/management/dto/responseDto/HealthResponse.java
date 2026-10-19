@@ -1,5 +1,7 @@
 package com.janus.management.dto.responseDto;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,13 +9,12 @@ import lombok.Setter;
 @Getter 
 @Setter 
 public class HealthResponse {
-    private String serviceName;
-    private String serviceDescription;
-    private String appStatus;
-
-    public HealthResponse(String serviceName, String serviceDescription, String appStatus) {
-        this.serviceName = serviceName;
-        this.serviceDescription = serviceDescription;
-        this.appStatus = appStatus;
+   private String serviceStatus;
+    private String dbStatus;
+    private LocalDateTime timestamp;
+    public HealthResponse(String serviceStatus, String dbStatus, LocalDateTime timestamp) {
+        this.serviceStatus = serviceStatus;
+        this.dbStatus = dbStatus;
+        this.timestamp = timestamp;
     }
 }
