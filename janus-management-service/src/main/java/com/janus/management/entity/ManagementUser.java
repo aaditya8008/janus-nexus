@@ -1,7 +1,5 @@
+
 package com.janus.management.entity;
-
-
-import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -15,23 +13,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity 
-@Table (name = "management_users")
-@Getter 
-@Setter 
-@NoArgsConstructor 
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "management_users")
+@Getter
+@Setter
+@NoArgsConstructor
 public class ManagementUser {
-    
-    @Id 
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "organisation_id")
-    private Organisation organisation;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
 
-    @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn (name = "role_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
     private String username;
@@ -39,5 +39,4 @@ public class ManagementUser {
     private boolean enabled;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
 }
