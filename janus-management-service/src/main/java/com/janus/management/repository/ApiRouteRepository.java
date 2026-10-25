@@ -1,0 +1,20 @@
+package com.janus.management.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.janus.management.entity.ApiRoute;
+import com.janus.management.entity.OrganizationStatus;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface ApiRouteRepository extends JpaRepository<ApiRoute, Long> {
+
+    List<ApiRoute> findAllByOrganizationId(Long organizationId);
+
+    List<ApiRoute> findAllByActiveTrueAndOrganizationStatus(OrganizationStatus status);
+
+    Optional<ApiRoute> findByIdAndOrganizationId(Long id, Long organizationId);
+
+    boolean existsByOrganizationIdAndRouteId(Long organizationId, String routeId);
+}
