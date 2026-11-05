@@ -12,7 +12,7 @@ public class KafkaConfig {
     
     @Bean 
     public NewTopic gatewayConfigurationTopic(
-        @Value ("${gateway.kafka.configuration.topic}") String topicName) {
+        @Value ("${gateway.kafka.configuration-topic}") String topicName) {
         return TopicBuilder.name(topicName)
             .partitions(1)
             .replicas(1)
